@@ -46,13 +46,13 @@ def data_usa(citystate):
 
     return measures
 
-# from location import location
-# loc = location('1941 Chenango Avene Clearwater, FL 33755')
-# #
-# print(loc)
-# # loc = location('1810 E Palm Ave Apt 4208 Tampa, FL, 33605')
-# address = loc['address'].replace(' ', '-')
-# citystate = loc['city'] + ', ' + loc['state']
-# print(address)
-# print(citystate)
-# print(data_usa(citystate.replace('-' , ', ')))
+from location import location
+loc = location('1941 Chenango Avene Clearwater, FL 33755')
+#
+print(loc)
+# loc = location('1810 E Palm Ave Apt 4208 Tampa, FL, 33605')
+address = loc['address'].replace(' ', '-')
+citystate = loc['city'] + ', ' + loc['state']
+print(address)
+print(citystate)
+print(data_usa(citystate.replace('-' , ', ')))

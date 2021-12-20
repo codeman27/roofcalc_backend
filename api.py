@@ -14,20 +14,22 @@ CORS(application)
 
 @application.route('/analysis', methods=['GET'])
 def get_data():
+    print('Running')
     user_input = {
-        'address': '445-San-Juan-St-Grand-Junction-CO-81504-USA'
+        'address': '519 Florida Ave, Clearwater, FL 33756'
     }
-    user_input['address'] = request.args.get('address', default='')
-    user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-')
+    user_input['address'] = request.args.get('address', default='') #Enable when pushing to Production
+    # user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-') #Testing
 
     loc = location(user_input['address'])
     address = loc['address'].replace(' ', '-')
     citystate = loc['city'] + '-' + loc['state']
     citystatezip = citystate +  '-'+ loc['zip']
     #
+    #
     data = {}
     data['zestimates'] = search_results(address, citystatezip)
-    data['mortgage_rate'] = mortgage_rates('30-year fixed rate')
+    data['mortgage_rate'] = mortgage_rates('30-year fixed-rate')
     data['monthly_mortgage'] = mortgage_calc_perc(data['zestimates']['zestimate'], 0.2, data['mortgage_rate']['rate'], data['mortgage_rate']['years'])
     data['taxes'] = property_taxes(loc['state'], loc['county'], data['zestimates']['zestimate'])
     data['pi'] = property_insurance(data['zestimates']['zestimate'])
@@ -40,7 +42,9 @@ def get_data():
     data['input_address'] = user_input['address']
     data['data_usa'] = data_usa(citystate.replace('-' , ', '))
 
+    # print(data) # Testing
     return jsonify(data)
+# get_data() # Testing
 
 @application.errorhandler(Exception)
 def exception_handler(error):

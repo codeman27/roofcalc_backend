@@ -18,11 +18,18 @@ def search_results(address, citystatezip):
         print('failed to connect')
         return
 
-    dict = xmltodict.parse(result.content)
+    zestimates = {}
+
+    try:
+        dict = xmltodict.parse(result.content)
+    except:
+        zestimates['zestimate'] = 0
+        zestimates['rent_zestimate'] = 0
+        print('Error zillow parsing xml')
+        return zestimates
+
     df = pd.DataFrame.from_records(dict['SearchResults:searchresults']['response']['results']['result'])
 
-    zestimates = {}
-    print(df['zestimate'])
     try:
         zestimates['zestimate'] = float(df['zestimate']['amount']['#text'])
         zestimates['rent_zestimate'] = float(df['rentzestimate']['amount']['#text'])

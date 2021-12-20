@@ -6,7 +6,7 @@ import re
 def mortgage_rates(loan_type):
     url = 'https://www.nerdwallet.com/mortgages/mortgage-rates'
     pattern = r'(.*)%'
-    pattern2 = r'(.*)-'
+    pattern2 = r'(\d{2})-'
 
     request = urlopen(url)
     response = request.read()
@@ -23,8 +23,7 @@ def mortgage_rates(loan_type):
 
     return rate_data
 
-# print(mortgage_rates('30-year fixed rate'))
+#print(mortgage_rates('30-year fixed-rate'))
 # print(mortgage_rates('15-year fixed rate'))
 # print(mortgage_rates('5/1 ARM rate'))
-#encode('utf-8')
-#print(soup.encode('utf-8'))
+# print(soup.encode('utf-8'))
