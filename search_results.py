@@ -25,7 +25,7 @@ def search_results(address, citystatezip):
     except:
         zestimates['zestimate'] = 0
         zestimates['rent_zestimate'] = 0
-        print('Error zillow parsing xml')
+        print('Error parsing zillow xml')
         return zestimates
 
     df = pd.DataFrame.from_records(dict['SearchResults:searchresults']['response']['results']['result'])
