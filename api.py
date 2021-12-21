@@ -44,7 +44,7 @@ def get_data():
 
     # print(data) # Testing
     return jsonify(data)
-get_data() # Testing
+# get_data() # Testing
 
 @application.errorhandler(Exception)
 def exception_handler(error):
