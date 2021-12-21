@@ -9,17 +9,17 @@ from insurance import *
 from expenses import *
 from data_usa import data_usa
 
-# application = Flask(__name__)
-# CORS(application)
-#
-# @application.route('/analysis', methods=['GET'])
+application = Flask(__name__)
+CORS(application)
+
+@application.route('/analysis', methods=['GET'])
 def get_data():
     print('Running')
     user_input = {
         'address': '415 Chipeta Ave UNIT 2, Grand Junction, CO 81501'
     }
-    # user_input['address'] = request.args.get('address', default='') #Enable when pushing to Production
-    user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-') #Testing
+    user_input['address'] = request.args.get('address', default='') #Enable when pushing to Production
+    # user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-') #Testing
 
     loc = location(user_input['address'])
     address = loc['address'].replace(' ', '-')
@@ -42,13 +42,13 @@ def get_data():
     data['input_address'] = user_input['address']
     data['data_usa'] = data_usa(citystate.replace('-' , ', '))
 
-    print(data) # Testing
-    #return jsonify(data)
+    # print(data) # Testing
+    return jsonify(data)
 get_data() # Testing
 
-# @application.errorhandler(Exception)
-# def exception_handler(error):
-#     return '500'
-#
-# if __name__ == '__main__':
-#     application.run(debug=False)
+@application.errorhandler(Exception)
+def exception_handler(error):
+    return '500'
+
+if __name__ == '__main__':
+    application.run(debug=False)
