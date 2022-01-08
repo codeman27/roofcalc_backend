@@ -22,13 +22,16 @@ def get_data():
     # user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-') #Testing
 
     loc = location(user_input['address'])
-    address = loc['address'].replace(' ', '-')
+    address = loc['address']
+    city = loc['city']
+    state = loc['state']
+    zip = loc['zip']
     citystate = loc['city'] + '-' + loc['state']
-    citystatezip = citystate +  '-'+ loc['zip']
+
     #
     #
     data = {}
-    data['zestimates'] = search_results(address, citystatezip)
+    data['zestimates'] = search_results(address, city, state, zip)
     data['mortgage_rate'] = mortgage_rates('30-year fixed-rate')
     data['monthly_mortgage'] = mortgage_calc_perc(data['zestimates']['zestimate'], 0.2, data['mortgage_rate']['rate'], data['mortgage_rate']['years'])
     data['taxes'] = property_taxes(loc['state'], loc['county'], data['zestimates']['zestimate'])
@@ -42,7 +45,7 @@ def get_data():
     data['input_address'] = user_input['address']
     data['data_usa'] = data_usa(citystate.replace('-' , ', '))
 
-    # print(data) # Testing
+    print(data) # Testing
     return jsonify(data)
 # get_data() # Testing
 

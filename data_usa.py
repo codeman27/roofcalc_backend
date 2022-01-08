@@ -50,8 +50,8 @@ def data_usa(citystate):
 
 from location import location
 
-loc = location('519 Florida Ave, Clearwater, FL 33756')
-#loc = location('146 Robin Ln, Panama City Beach, FL 32407')
+#loc = location('519 Florida Ave, Clearwater, FL 33756')
+loc = location('146 Robin Ln, Panama City Beach, FL 32407')
 address = loc['address'].replace(' ', '-')
 citystate = loc['city'] + ', ' + loc['state']
 print(address)

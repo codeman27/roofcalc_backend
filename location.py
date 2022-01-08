@@ -17,6 +17,3 @@ def location(address):
     location_parts['county'] = str.strip((result.county).replace('County', '')) if result.county else result.city
 
     return location_parts
-
-# print(location('5018-Miami-St-St.-Louis-MO-63139-USA'))
-# print(location('1347-White-Ave-Grand-Junction-CO-81501'))
