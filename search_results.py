@@ -9,7 +9,7 @@ def search_results(address, city, state, zip):
     params = {
         'access_token': api_keys.ZILLOW_API_KEY,
         'address': address, #self._loc.state
-        'city': city,
+        # 'city': city,
         'state': state,
         'postalCode': zip
     }
@@ -20,12 +20,14 @@ def search_results(address, city, state, zip):
         return
 
     df = pd.DataFrame.from_dict(response.json()['bundle'])
-    print(address)
-    df = df[df['address'].str.contains(address)][['address', 'zestimate', 'rentalZestimate']]
     print(df)
-    zestimates = {}
 
+    zestimates = {}
     try:
+        df = pd.DataFrame.from_dict(response.json()['bundle'])
+        print(address)
+        df = df[df['address'].str.contains(address)][['address', 'zestimate', 'rentalZestimate']]
+        print(df)
         zestimates['zestimate'] = float(df['zestimate'])
         zestimates['rent_zestimate'] = float(df['rentalZestimate'])
     except:
@@ -35,7 +37,7 @@ def search_results(address, city, state, zip):
     return zestimates
 
 from location import location
-loc = location('519 Florida Ave, Clearwater FL 33756')
+loc = location('2035 42nd St S, Saint Petersburg, FL 33711')
 # loc = location('1810 E Palm Ave Apt 4208 Tampa, FL, 33605')
 # address = loc['address'].replace(' ', '-')
 # citystatezip = loc['city'] + '-' + loc['state'] +  '-'+ loc['zip']
