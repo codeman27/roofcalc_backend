@@ -22,8 +22,8 @@ def data_usa(citystate):
     measure_names = ['Household Income by Race', 'Population', 'Workforce by Occupation and Gender']
     measures = {}
 
-    print(data_id)
-    print(measure_names)
+    # print(data_id)
+    # print(measure_names)
     for measure in measure_names:
         url = 'http://datausa.io/api/data'
         params = {
@@ -51,9 +51,9 @@ def data_usa(citystate):
 from location import location
 
 #loc = location('519 Florida Ave, Clearwater, FL 33756')
-loc = location('146 Robin Ln, Panama City Beach, FL 32407')
-address = loc['address'].replace(' ', '-')
-citystate = loc['city'] + ', ' + loc['state']
-print(address)
-print(citystate)
-print(data_usa(citystate.replace('-' , ', ')))
+# loc = location('146 Robin Ln, Panama City Beach, FL 32407')
+# address = loc['address'].replace(' ', '-')
+# citystate = loc['city'] + ', ' + loc['state']
+# print(address)
+# print(citystate)
+# print(data_usa(citystate.replace('-' , ', ')))

@@ -9,16 +9,16 @@ from insurance import *
 from expenses import *
 from data_usa import data_usa
 
-application = Flask(__name__)
-CORS(application)
+application = Flask(__name__) #Production
+CORS(application) #Production
 
-@application.route('/analysis', methods=['GET'])
+@application.route('/analysis', methods=['GET']) #Production
 def get_data():
     print('Running')
     user_input = {
-        'address': '2035 42nd St S, Saint Petersburg, FL 33711'
+        'address': '428 13th Ct NW, Center Point, AL 35215'
     }
-    user_input['address'] = request.args.get('address', default='') #Enable when pushing to Production
+    user_input['address'] = request.args.get('address', default='') #Production
     # user_input['address'] = user_input['address'].replace(',', '').replace(' ', '-') #Testing
 
     loc = location(user_input['address'])
@@ -46,9 +46,10 @@ def get_data():
     data['data_usa'] = data_usa(citystate.replace('-' , ', '))
 
     # print(data) # Testing
-    return jsonify(data)
+    return jsonify(data) #Production
 # get_data() # Testing
 
+#Production
 @application.errorhandler(Exception)
 def exception_handler(error):
     return '500'
